@@ -12,6 +12,7 @@ tasks:
       image: "quay.io/mrrrgn/ubuntu-ci:0.0.2"
       command:
         - "/bin/bash"
+        - "--login"
         - "-c"
         - "git clone $GITHUB_HEAD_REPO_URL && cd loop && git checkout $GITHUB_HEAD_BRANCH && make install && make build && make lint"
     extra:
