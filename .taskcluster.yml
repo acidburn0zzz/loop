@@ -38,7 +38,7 @@ tasks:
       command:
         - "/bin/bash"
         - "-lc"
-        - "git clone {{event.head.repo.url}} repo && cd repo && git checkout {{event.base.repo.branch}} && make karma"
+        - "git clone {{event.head.repo.url}} repo && cd repo && git checkout {{event.base.repo.branch}} && pip install mozdownload && mozdownload --type=daily --branch=mozilla-central && tar xfj *.bz2 && FIREFOX_BIN=`pwd`/firefox/firefox make karma"
     extra:
       github:
         env: true
@@ -58,7 +58,7 @@ tasks:
       command:
         - "/bin/bash"
         - "-lc"
-        - "git clone {{event.head.repo.url}} repo && cd repo && git checkout {{event.base.repo.branch}} && pip install mozdownload && mozdownload --type=daily --branch=mozilla-central && tar xfj *.bz2 && TEST_BROWSER=`pwd`/firefox/firefox TEST_SERVER=dev make functional"
+        - "apt-get install -y zip && git clone {{event.head.repo.url}} repo && cd repo && git checkout {{event.base.repo.branch}} && pip install mozdownload && mozdownload --type=daily --branch=mozilla-central && tar xfj *.bz2 && TEST_BROWSER=`pwd`/firefox/firefox TEST_SERVER=dev make functional"
     extra:
       github:
         env: true
