@@ -14,7 +14,7 @@ tasks:
         - "/bin/bash"
         - "--login"
         - "-c"
-        - "git clone $GITHUB_HEAD_REPO_URL && cd loop && git checkout $GITHUB_HEAD_BRANCH && make install && make build && make lint"
+        - "checkout-pull-request && make install && make build && make lint"
     extra:
       github:
         env: true
