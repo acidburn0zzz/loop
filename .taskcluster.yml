@@ -9,12 +9,11 @@ tasks:
     workerType: "{{ taskcluster.docker.workerType }}"
     payload:
       maxRunTime: 1200
-      image: "quay.io/mrrrgn/ubuntu-ci:0.0.2"
+      image: "quay.io/mrrrgn/ubuntu-ci:0.0.1"
       command:
         - "/bin/bash"
-        - "--login"
-        - "-c"
-        - "checkout-pull-request && make install && make build && make lint"
+        - "-lc"
+        - "git clone {{event.head.repo.url}} repo && cd repo && git checkout {{event.base.repo.branch}} && make install && make build && make lint"
     extra:
       github:
         env: true
